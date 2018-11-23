@@ -1,0 +1,31 @@
+#.travis.yml
+
+language: node_js
+node_js:
+  - "10.13.0"
+
+branches:
+  only:
+    - master
+
+before_script:
+  - npm install -g @angular/cli
+
+script:
+  - ng build --prod --base-href https://mokacraft.github.io/pointeuse_front/
+
+after_success:
+
+notifications:
+  # email:
+  #   on_failure: change
+  #   on_success: change
+
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist/pointeuse
+  on:
+    branch: master
